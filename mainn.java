@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-public class mainn {
+public class mainn  {
+    static String printcompdes = "                              ";
     static int playerAccount = 100000;
     static int currBettingAmount = 1000;
     static int moneyOnTable = 0;
@@ -8,9 +9,11 @@ public class mainn {
     static String[] hiddenPlayerCards = {".....CARD 1...." , ".....CARD 2...." ,".....CARD 3...."};
     static String[] hiddenCompCards =   {".....CARD 1...." , ".....CARD 2...." ,".....CARD 3...."};
 
-    static int playerCardPoints=0;
-    static int compCardPoints=0;
+    static int playerCardPoints=PointSystem.countingPlayerPoints();
+    static int compCardPoints=CompMind.countingCompPoints();
     static int winningAmount=0;
+    static boolean playerWantToShow=false;
+    static boolean compWantToShow=false;
 
     
     static Scanner sc = new Scanner(System.in);
@@ -23,8 +26,8 @@ public class mainn {
     public static void homePage() {
         clearScreen();
         System.out.println("-----------------------------------------------------------------------------------------------------");
-        System.out.println("|                                                                                                    |");
-        System.out.println("|                                                                                                    |");
+        System.out.println("|                                             PAPPU STUDIOS                                          |");
+        System.out.println("|                                               PRESENTS                                             |");
         System.out.println("|                                                                                                    |");
         System.out.println("|            _______               _______    ________   _________  _________  _________             |");
         System.out.println("|                   |             |       |  |        |      |          |          |                 |");
@@ -80,7 +83,7 @@ public class mainn {
         System.out.println("|            _______|             |          |        |      |          |      ____|____             |");
         System.out.println("|                                                                                                    |");
         System.out.println("|                                                                                                    |");
-        System.out.println("|                             YOUR CURRENT AMOUNT IS : "+playerAccount);
+        System.out.println("|                             YOUR CURRENT AMOUNT IS : $ "+playerAccount);
         System.out.println("|                                                                                                    |");
         System.out.println("|                                    PRESS ( C ) TO CONTINUE                                         |");
         System.out.println("|                                                                                                    |");
@@ -100,7 +103,7 @@ public class mainn {
     }
 
     public static void table() {
-
+        CompMind cm;
         clearScreen();
 
         // pack show bet doubleBet LeaveTheTable ExitTheGame
@@ -113,16 +116,17 @@ public class mainn {
         System.out.println("|              "+hiddenCompCards[1]+"                                        "+hiddenPlayerCards[1]+"                |");
         System.out.println("|              "+hiddenCompCards[2]+"                                        "+hiddenPlayerCards[2]+"                |");
         System.out.println("|                                                                                                    |");
-        System.out.println("|          "+CompMind.printCompDescision()+"                    "+printDescision()+"          |");
+        System.out.println("|          "+printcompdes+"                    "+printDescision()+"          |");
         System.out.println("|                                                                                                    |");
-        System.out.println("|                                   MONEY ON THE TABLE : "+moneyOnTable);
+        System.out.println("|                                   MONEY ON THE TABLE : $ "+moneyOnTable);
         System.out.println("|                                                                                                    |");
         System.out.println("|                                                                                                    |");
         System.out.println("|              SHOW ( S )        BET ( B )         DOUBLE BET ( D )        SEE CARDS ( C )           |");
-        System.out.println("|                                 $ "+currBettingAmount+"            $ "+currBettingAmount*2+"                            ");
+        System.out.println("|                $"+currBettingAmount+"          $ "+currBettingAmount+"            $ "+currBettingAmount*2+"                            ");
         System.out.println("|       LEAVE THE TABLE ( L )                         EXIT THE GAME ( E )                            |");
         System.out.println("|                                                                                                    |");
         System.out.println("------------------------------------------------------------------------------------------------------");
+
 
     }
     static String input = "";       // for takeINput() and printDescision() only .
@@ -155,12 +159,15 @@ public class mainn {
             case "c":
             printDescision();
             seeCards();
+            table();
+            takeInput();
             default:
             printDescision();
                 break;
         }
         // it will take input from user for every action when and only when the player
         // is on the table .
+        
     }
 
     public static void exitTheGame() {
@@ -171,11 +178,12 @@ public class mainn {
     public static void LeaveTheTable() {
         // will leave the table , losing all his bet money
         setEverything();
-        homePage();
+        confirmationWindow();
     }
 
 
     public static void show() {
+        moneyOnTable+=currBettingAmount;
         // will show both player and comp cards  , and move on to winning screen
         hiddenPlayerCards[0] =PointSystem.cards[sixCardsIndex[0]][0]+" of "+PointSystem.cards[sixCardsIndex[0]][1];
         hiddenPlayerCards[1] =PointSystem.cards[sixCardsIndex[1]][0]+" of "+PointSystem.cards[sixCardsIndex[1]][1];
@@ -185,7 +193,6 @@ public class mainn {
         hiddenCompCards[1] =PointSystem.cards[sixCardsIndex[4]][0]+" of "+PointSystem.cards[sixCardsIndex[4]][1];
         hiddenCompCards[2] =PointSystem.cards[sixCardsIndex[5]][0]+" of "+PointSystem.cards[sixCardsIndex[5]][1];
 
-        winningPage();
     }
 
     public static void seeCards(){
@@ -219,52 +226,37 @@ public class mainn {
             case "d":
                 return "     YOU BET DOUBLE AMOUNT    ";
             case "s":
+                playerWantToShow=true;
                 return "        YOU WANT TO SHOW      ";
             default:
-                return "your descisions will show here";
+                return "  please enter a vaild input  ";
         }
     }
-
-    private static void winningPage() {
-        clearScreen();
-        winningAmount = moneyOnTable;
-        System.out.println("------------------------------------------------------------------------------------------------------");
-        System.out.println("|                                                                           AMOUNT : $ "+playerAccount);
-        System.out.println("|                                                                                                    |");
-        System.out.println("|                COMPUTER                                                 PLAYER                     |");
-        System.out.println("|                                                                                                    |");
-        System.out.println("|             "+hiddenCompCards[0]+"                                       "+hiddenPlayerCards[0]+"                |");
-        System.out.println("|             "+hiddenCompCards[1]+"                                       "+hiddenPlayerCards[1]+"                |");
-        System.out.println("|             "+hiddenCompCards[2]+"                                       "+hiddenPlayerCards[2]+"                |");
-        System.out.println("|                                                                                                    |");
-        System.out.println("|----------------------------------------------------------------------------------------------------|");
-        System.out.println("|                                                                                                    |");
-        System.out.println("|                                   MONEY ON THE TABLE : $ "+moneyOnTable);
-        System.out.println("|                                     YOU WON -->  $ "+winningAmount+"                                              ");
-        System.out.println("|                                                                                                    |");
-        System.out.println("|                                                                                                    |");
-        System.out.println("|                  CONTINUE( C )                                                 EXIT( E )           |");
-        System.out.println("|                                                                                                    |");
-        System.out.println("|                                                                                                    |");
-        System.out.println("------------------------------------------------------------------------------------------------------");
+    public static void afterRound(){
         String s = "";
         while (true) {
             s = sc.next();
             if (s.equals("c")) {
                 setEverything();
+
                 break;
             }
             if (s.equals("e")) {
                 System.exit(0);
             }
         }
-
     }
-    private static void setEverything() {
+    
+    public static void setEverything() {
+        input="";
         currBettingAmount = 1000;
         playerAccount+= winningAmount;
         winningAmount=0;
         moneyOnTable=0;
+        playerWantToShow =false;
+        printcompdes="                              ";
+        
+        compWantToShow=false;
         hiddenCompCards[0]=".....CARD 1....";
         hiddenCompCards[1]=".....CARD 2....";
         hiddenCompCards[2]=".....CARD 3....";
@@ -272,16 +264,10 @@ public class mainn {
         hiddenPlayerCards[1]=".....CARD 2....";
         hiddenPlayerCards[2]=".....CARD 3....";
         sixCardsIndex= PointSystem.shuffle();
+        playerCardPoints =PointSystem.countingPlayerPoints();
+        compCardPoints = CompMind.countingCompPoints();
 
     }
 
-    public static void main(String[] args) {
-        homePage();
-        while (true) {
-            table();
-            takeInput();
-            CompMind.compMind();
-
-        }
-    }
+    
 }
