@@ -20,7 +20,7 @@ As you enter the table you can see stuffs like this...
 ![3 patti table ](https://github.com/user-attachments/assets/0fb585ee-4199-4287-aec8-e010dce5a6ed)
 <br>
 
-Clearly , you and your opponent has three cards , you can take your descisions and bet fake money as much as you can .
+Clearly , you and your opponent has three cards , you can make your descisions and bet fake money as much as you can .
 
 PLEASE DO ENJOY 😊
 
