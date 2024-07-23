@@ -8,8 +8,6 @@ Three Patti, also known as Teen Patti, is a popular card game originating from t
 - Please do not press any invalid keys , otherwise the game might stop working.  
 - Please press enter key after evey descision you take . For example  , to  CONTINUE( C )  , press c + enter key.
 
-
-
 ## GAME UI
 
 The game will start with the homepage as mention below:
@@ -26,5 +24,13 @@ Clearly , you and your opponent has three cards , you can take your descisions a
 
 PLEASE DO ENJOY 😊
 
-
 ## 🛠 Skills
+JAVA
+<br>
+<br>
+
+## 🔗 Links
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/pratyush-parashar-134a7930b/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/Pratyuxxhh)
+
