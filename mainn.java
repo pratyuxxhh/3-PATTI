@@ -26,8 +26,8 @@ public class mainn  {
     public static void homePage() {
         clearScreen();
         System.out.println("-----------------------------------------------------------------------------------------------------");
-        System.out.println("|                                             PAPPU STUDIOS                                          |");
-        System.out.println("|                                               PRESENTS                                             |");
+        System.out.println("|                                                                                                    |");
+        System.out.println("|                                                                                                    |");
         System.out.println("|                                                                                                    |");
         System.out.println("|            _______               _______    ________   _________  _________  _________             |");
         System.out.println("|                   |             |       |  |        |      |          |          |                 |");
